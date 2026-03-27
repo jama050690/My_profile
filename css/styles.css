@@ -1,0 +1,283 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+ul,
+ol {
+  list-style: none;
+}
+
+:root {
+  --font-family: "Montserrat", sans-serif;
+  --icon-color: #fff;
+  --text-white: #ffffff;
+  --text-color: #0f172a;
+  --bg: #f8fafc;
+  --bgc: #ffffff;
+  --text-color-2: #475569;
+  --login-color: #0f766e;
+  --logo-filter: invert(0);
+  --surface-shadow: 0 25px 60px rgba(15, 23, 42, 0.08);
+}
+
+.container {
+  max-width: 1240px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  background-image:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.15), transparent 30%),
+    radial-gradient(circle at top right, rgba(20, 184, 166, 0.12), transparent 24%);
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.dark_mode {
+  --icon-color: #020617;
+  --text-white: #e2e8f0;
+  --text-color: #f8fafc;
+  --text-color-2: #cbd5e1;
+  --bg: #020617;
+  --bgc: #0f172a;
+  --login-color: #14b8a6;
+  --logo-filter: invert(1) brightness(160%);
+  --surface-shadow: 0 25px 70px rgba(2, 6, 23, 0.45);
+}
+
+a {
+  color: inherit;
+}
+
+img.logo {
+  filter: var(--logo-filter);
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.landing-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.editorial-card {
+  border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
+  background: color-mix(in srgb, var(--bgc) 94%, transparent);
+  box-shadow: var(--surface-shadow);
+}
+
+.portrait-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: 18px auto auto 18px;
+  width: 110px;
+  height: 110px;
+  border-top: 2px solid rgba(34, 211, 238, 0.65);
+  border-left: 2px solid rgba(34, 211, 238, 0.65);
+  border-radius: 24px 0 0 0;
+}
+
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: auto 18px 18px auto;
+  width: 110px;
+  height: 110px;
+  border-right: 2px solid rgba(34, 211, 238, 0.55);
+  border-bottom: 2px solid rgba(34, 211, 238, 0.55);
+  border-radius: 0 0 24px 0;
+}
+
+.section-kicker {
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.project-shelf {
+  display: grid;
+  gap: 20px;
+}
+
+.project-card-strong {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  background: linear-gradient(145deg, #082f49, #0f172a);
+  color: white;
+  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.25);
+}
+
+.project-card-strong::after {
+  content: "";
+  position: absolute;
+  inset: auto -40px -60px auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.14);
+}
+
+.contact-panel {
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  box-shadow: 0 25px 60px rgba(14, 165, 233, 0.22);
+}
+
+.glass-card {
+  background: color-mix(in srgb, var(--bgc) 84%, transparent);
+  box-shadow: var(--surface-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.hero-photo {
+  box-shadow: var(--surface-shadow);
+}
+
+.hero-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 36px;
+  background:
+    linear-gradient(135deg, rgba(8, 47, 73, 0.95), rgba(15, 118, 110, 0.85)),
+    radial-gradient(circle at top right, rgba(103, 232, 249, 0.24), transparent 28%);
+  color: #f8fafc;
+  box-shadow: var(--surface-shadow);
+}
+
+.hero-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto -40px -60px auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.has-bg {
+  background:
+    linear-gradient(145deg, rgba(15, 118, 110, 0.88), rgba(8, 47, 73, 0.9)),
+    url("/photo_2025-11-21_19-33-24.jpg") center/cover no-repeat;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(251, 191, 36, 0.25), transparent 25%),
+    linear-gradient(135deg, #071a2f, #0f766e 55%, #164e63);
+}
+
+.auth-card {
+  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.35);
+  backdrop-filter: blur(20px);
+}
+
+.dashboard-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(20, 184, 166, 0.12), transparent 20%),
+    radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.12), transparent 28%);
+}
+
+.dashboard-panel {
+  background: color-mix(in srgb, var(--bgc) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
+  box-shadow: var(--surface-shadow);
+}
+
+.contact-row {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.contact-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.social {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #082f49;
+  border: 1px solid rgba(8, 47, 73, 0.14);
+  border-radius: 999px;
+  box-shadow: 0 14px 30px rgba(8, 47, 73, 0.24);
+}
+
+.social.wide {
+  width: 64px;
+}
+
+.nav-text {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.profile-copy {
+  color: var(--text-color-2);
+}
+
+.metric-card {
+  border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
+  background: color-mix(in srgb, var(--bgc) 92%, transparent);
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
+}
+
+@media (max-width: 900px) {
+  .contact-row {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .contact-icons {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-grid {
+    grid-template-columns: 0.92fr 1.08fr;
+  }
+
+  .project-shelf {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
