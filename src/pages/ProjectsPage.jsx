@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import PortfolioHeader from "../components/PortfolioHeader";
+import PortfolioFooter from "../components/PortfolioFooter";
+import ProjectCard from "../components/ProjectCard";
 import { projects } from "../data/projects";
 import { useTheme } from "../hooks/useTheme";
 
@@ -24,51 +26,26 @@ export default function ProjectsPage() {
 
         <div className="project-shelf">
           {projects.map((project, index) => (
-            <article
-              key={project.slug}
-              className={
-                index === 0
-                  ? "project-card-strong px-7 py-7"
-                  : "editorial-card rounded-[32px] px-7 py-7"
-              }
-            >
-              <p
-                className={
-                  index === 0
-                    ? "section-kicker text-cyan-300"
-                    : "section-kicker text-cyan-600"
-                }
-              >
-                {project.stack}
-              </p>
-              <h2 className="mt-4 text-3xl font-black">{project.title}</h2>
-              <p
-                className={
-                  index === 0
-                    ? "mt-5 max-w-xl text-base leading-7 text-slate-200"
-                    : "profile-copy mt-5 text-base leading-7"
-                }
-              >
-                {project.description}
-              </p>
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link
-                  to={`/projects/${project.slug}`}
-                  className={
-                    index === 0
-                      ? "inline-flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300"
-                      : "inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 font-semibold text-white transition hover:opacity-90"
-                  }
-                >
-                  View Case Study
-                  <i className="fa-solid fa-arrow-right" />
-                </Link>
-              </div>
-            </article>
+            <ProjectCard key={project.slug} project={project} strong={index === 0} />
           ))}
         </div>
+
+        <div className="cta-panel px-7 py-9 text-center md:px-10">
+          <p className="relative z-10 section-kicker text-cyan-300">Hamkorlik</p>
+          <h2 className="relative z-10 mt-3 text-2xl font-black md:text-4xl">
+            Loyiha bo‘yicha hamkorlik qilishni xohlaysizmi?
+          </h2>
+          <Link
+            to="/contact"
+            className="relative z-10 mt-6 inline-flex items-center gap-2 rounded-full bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300"
+          >
+            Bog‘lanish
+            <i className="fa-solid fa-arrow-right" />
+          </Link>
+        </div>
       </main>
+
+      <PortfolioFooter />
     </div>
   );
 }

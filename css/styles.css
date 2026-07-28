@@ -1,6 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
+
+/*
+  Design token bridge — Tailwind v4 is CSS-config (no tailwind.config.js), so
+  this @theme block IS the "config extension". It re-exposes tokens that are
+  only NEW (surfaces 2/3, tertiary text, accent, hairline border, the mono
+  font, and motion easings/durations) as Tailwind utilities (bg-surface-2,
+  text-fg-tertiary, bg-accent, border-hairline, font-mono, ease-emphasized,
+  duration-base, ...). `inline` keeps them as live var() references so the
+  existing .dark_mode class-toggle (not prefers-color-scheme) still works.
+
+  Deliberately NOT remapped: --radius-* and --shadow-* (Tailwind's own scale
+  names). AuthPage/ProfilePage/auth/*.html already use rounded-2xl/3xl/md and
+  shadow-lg/2xl — overriding those keys would silently reskin pages outside
+  this task's scope. The new radius/elevation scale below stays as plain
+  custom properties, consumed via arbitrary values, e.g. rounded-[var(--radius-token-xl)].
+*/
+@theme inline {
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-fg-tertiary: var(--text-tertiary);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-hairline: var(--border-hairline);
+
+  --font-display: var(--font-family);
+  --font-mono: var(--font-mono-family);
+
+  --ease-standard: var(--motion-ease-standard);
+  --ease-emphasized: var(--motion-ease-emphasized);
+  --duration-fast: var(--motion-duration-fast);
+  --duration-base: var(--motion-duration-base);
+  --duration-slow: var(--motion-duration-slow);
+}
 
 ul,
 ol {
@@ -8,16 +43,53 @@ ol {
 }
 
 :root {
+  /* Typography */
   --font-family: "Montserrat", sans-serif;
+  --font-mono-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Motion — one vocabulary for every transition in the app */
+  --motion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-duration-fast: 120ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 360ms;
+
+  /* Radius scale (kept out of Tailwind's own --radius-* namespace, see note above) */
+  --radius-token-sm: 12px;
+  --radius-token-md: 20px;
+  --radius-token-lg: 28px;
+  --radius-token-xl: 36px;
+
+  /* Color system — light theme (default) */
   --icon-color: #fff;
   --text-white: #ffffff;
   --text-color: #0f172a;
+  --text-color-2: #475569;
+  --text-tertiary: #94a3b8;
   --bg: #f8fafc;
   --bgc: #ffffff;
-  --text-color-2: #475569;
+  --surface-2: #f1f5f9;
+  --surface-3: #e8edf3;
+  --accent: #0891b2;
+  --accent-strong: #0e7490;
+  --accent-soft: rgba(8, 145, 178, 0.1);
+  --border-hairline: rgba(15, 23, 42, 0.08);
   --login-color: #0f766e;
   --logo-filter: invert(0);
   --surface-shadow: 0 25px 60px rgba(15, 23, 42, 0.08);
+  --shadow-elevation-1: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-elevation-2: 0 2px 4px rgba(15, 23, 42, 0.06), 0 24px 48px rgba(15, 23, 42, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .container {
@@ -53,15 +125,26 @@ body::-webkit-scrollbar {
   --text-white: #e2e8f0;
   --text-color: #f8fafc;
   --text-color-2: #cbd5e1;
+  --text-tertiary: #64748b;
   --bg: #020617;
   --bgc: #0f172a;
+  --surface-2: #101826;
+  --surface-3: #16202f;
+  --accent: #22d3ee;
+  --accent-strong: #67e8f9;
+  --accent-soft: rgba(34, 211, 238, 0.14);
+  --border-hairline: rgba(255, 255, 255, 0.08);
   --login-color: #14b8a6;
   --logo-filter: invert(1) brightness(160%);
   --surface-shadow: 0 25px 70px rgba(2, 6, 23, 0.45);
+  --shadow-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-elevation-2: 0 2px 4px rgba(0, 0, 0, 0.5), 0 24px 56px rgba(0, 0, 0, 0.45);
 }
 
-a {
-  color: inherit;
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 img.logo {
@@ -148,8 +231,257 @@ img.logo {
 
 .glass-card {
   background: color-mix(in srgb, var(--bgc) 84%, transparent);
+  border: 1px solid var(--border-hairline);
   box-shadow: var(--surface-shadow);
   backdrop-filter: blur(18px);
+}
+
+/* Nav link — one accent token drives hover/active/focus, underline is a
+   transform-only scale so it stays off the layout/paint-heavy path. */
+.nav-link {
+  position: relative;
+  padding-block: 4px;
+  color: var(--text-color-2);
+  transition: color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--text-color);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.nav-link[aria-current="page"] {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+
+/* Theme toggle — icons cross-fade/scale on transform+opacity only. */
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  height: 48px;
+  width: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border-hairline);
+  cursor: pointer;
+  transition: border-color var(--motion-duration-base) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.theme-toggle-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.6) rotate(-90deg);
+  transition: opacity var(--motion-duration-base) var(--motion-ease-emphasized),
+    transform var(--motion-duration-base) var(--motion-ease-emphasized);
+}
+
+.theme-toggle-icon[data-visible="true"] {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.theme-toggle-icon img {
+  height: 20px;
+  width: 20px;
+}
+
+/* Small entrance used by FadeInUp — opacity + translateY only, so it never
+   triggers layout/reflow and can't cause load-time layout shift. */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--motion-duration-slow) var(--motion-ease-emphasized),
+    transform var(--motion-duration-slow) var(--motion-ease-emphasized);
+}
+
+.fade-in-up[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Logo lockup — the mark uses currentColor, so one asset works on both
+   themes; no separate light/dark <img> swap needed. */
+.logo-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-color);
+  transition: color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.logo-lockup:hover,
+.logo-lockup:focus-visible {
+  color: var(--accent);
+}
+
+.logo-lockup:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 8px;
+}
+
+.logo-mark {
+  flex-shrink: 0;
+}
+
+.logo-wordmark {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Sticky header: resting state is a floating pill (elevation-1); past the
+   scroll threshold it condenses, gains a heavier frosted blur and moves to
+   elevation-2 — one 200ms transition, no layout-affecting properties. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: var(--shadow-elevation-1);
+  transition: padding var(--motion-duration-base) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-base) var(--motion-ease-standard),
+    background-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.site-header-scrolled {
+  background: color-mix(in srgb, var(--bgc) 92%, transparent);
+  backdrop-filter: blur(22px);
+  box-shadow: var(--shadow-elevation-2);
+}
+
+.mobile-menu-button {
+  display: inline-flex;
+  height: 48px;
+  width: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--border-hairline);
+  background: var(--bg);
+  color: var(--text-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.mobile-menu-button:hover {
+  border-color: var(--accent);
+}
+
+.mobile-menu-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Mobile nav collapse — grid-template-rows 0fr→1fr animates height without
+   ever reading/writing layout in JS; overflow:hidden on the inner wrapper
+   clips it. Disabled entirely at md+, where nav is always visible. */
+.primary-nav {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.primary-nav[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.primary-nav-inner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.primary-nav[data-open="true"] .primary-nav-inner {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .primary-nav {
+    display: block;
+    grid-template-rows: none;
+  }
+
+  .primary-nav-inner {
+    overflow: visible;
+    opacity: 1;
+  }
+}
+
+.login-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-weight: 600;
+  color: #f8fafc;
+  background: var(--login-color);
+  box-shadow: var(--shadow-elevation-1);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-standard),
+    opacity var(--motion-duration-base) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.login-button:hover {
+  opacity: 0.9;
+  box-shadow: var(--shadow-elevation-2);
+}
+
+.login-button:active {
+  transform: scale(0.97);
+}
+
+.login-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .hero-photo {
@@ -248,6 +580,90 @@ img.logo {
 .metric-card {
   border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
   background: color-mix(in srgb, var(--bgc) 92%, transparent);
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-color-2);
+  border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+  background: color-mix(in srgb, var(--bgc) 92%, transparent);
+}
+
+.cta-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 36px;
+  background: linear-gradient(135deg, #082f49, #0f766e);
+  color: #f8fafc;
+  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.25);
+}
+
+.cta-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto -40px -60px auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.14);
+}
+
+.project-thumb {
+  position: relative;
+  display: flex;
+  height: 140px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.project-thumb i {
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-color-2);
+  border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
+  background: color-mix(in srgb, var(--bgc) 92%, transparent);
+}
+
+.tag-pill.on-dark {
+  color: rgba(226, 232, 240, 0.9);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.stack-card {
+  border-radius: 28px;
+  border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
+  background: color-mix(in srgb, var(--bgc) 94%, transparent);
+  box-shadow: var(--surface-shadow);
+  padding: 28px;
+}
+
+.stack-card-icon {
+  display: inline-flex;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--login-color) 16%, transparent);
+  color: var(--login-color);
 }
 
 input,

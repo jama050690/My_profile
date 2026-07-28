@@ -1,4 +1,6 @@
 import PortfolioHeader from "../components/PortfolioHeader";
+import PortfolioFooter from "../components/PortfolioFooter";
+import { skills } from "../data/skills";
 import { useTheme } from "../hooks/useTheme";
 
 export default function AboutPage() {
@@ -26,6 +28,23 @@ export default function AboutPage() {
             Asosiy maqsadim chiroyli, tezkor va amaliy web ilovalar yaratish,
             doimiy o‘rganish va real loyihalar orqali tajribamni oshirib borishdir.
           </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            {skills.map((skill) => (
+              <span key={skill} className="skill-chip">
+                {skill}
+              </span>
+            ))}
+          </div>
+
+          <a
+            href="/Babajonov_Jamshiddin_Resume_dev.docx"
+            download
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--login-color)] px-6 py-3 font-semibold text-white transition hover:opacity-90"
+          >
+            Resume yuklab olish
+            <i className="fa-solid fa-download" />
+          </a>
         </article>
 
         <article className="portrait-frame editorial-card rounded-[36px] p-4">
@@ -36,6 +55,8 @@ export default function AboutPage() {
           />
         </article>
       </main>
+
+      <PortfolioFooter />
     </div>
   );
 }

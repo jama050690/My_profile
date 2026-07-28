@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
+import PortfolioFooter from "../components/PortfolioFooter";
 import { getProjectBySlug } from "../data/projects";
 import { useTheme } from "../hooks/useTheme";
 
@@ -54,6 +55,14 @@ export default function ProjectPage() {
           <p className="relative z-10 mt-6 max-w-3xl text-lg leading-8 text-slate-200">
             {project.description}
           </p>
+
+          <div className="relative z-10 mt-6 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span key={tag} className="tag-pill on-dark">
+                {tag}
+              </span>
+            ))}
+          </div>
 
           <div className="relative z-10 mt-8 flex flex-wrap gap-3">
             <a
@@ -122,6 +131,8 @@ export default function ProjectPage() {
           </article>
         </section>
       </main>
+
+      <PortfolioFooter />
     </div>
   );
 }

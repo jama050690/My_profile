@@ -1,65 +1,91 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import Logo from "./Logo";
+import FadeInUp from "./motion/FadeInUp";
+import ThemeToggleButton from "./motion/ThemeToggleButton";
+
+const NAV_LINKS = [
+  { to: "/", label: "Home", end: true },
+  { to: "/about", label: "About" },
+  { to: "/projects", label: "Projects" },
+  { to: "/contact", label: "Contact" },
+];
 
 export default function PortfolioHeader({ isDark, toggleTheme }) {
-  const navClass = ({ isActive }) =>
-    `transition hover:text-cyan-500 ${isActive ? "text-cyan-600" : ""}`;
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="container flex flex-col gap-6 rounded-[32px] glass-card px-6 py-5 md:flex-row md:items-center md:justify-between">
-      <div className="flex items-center justify-between gap-4">
-        <Link to="/">
-          <img className="logo h-[88px] w-[176px]" src="/logoa-2.png" alt="Logo" />
-        </Link>
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--bg)] md:hidden"
-          aria-label="Toggle theme"
-        >
-          <img
-            src={isDark ? "/Sun_mode.svg" : "/Dark_mode.svg"}
-            alt="Mode icon"
-            className="h-6 w-6"
-          />
-        </button>
-      </div>
+    <FadeInUp>
+      <header
+        className={`site-header container glass-card flex flex-col gap-2 rounded-[var(--radius-token-xl)] px-6 md:flex-row md:items-center md:justify-between md:gap-6 ${
+          scrolled ? "site-header-scrolled py-3" : "py-5"
+        }`}
+      >
+        <div className="flex items-center justify-between gap-4">
+          <Logo />
 
-      <nav className="flex flex-col gap-4 text-lg font-semibold md:flex-row md:items-center md:gap-8">
-        <NavLink to="/" className={navClass} end>
-          Home
-        </NavLink>
-        <NavLink to="/about" className={navClass}>
-          About
-        </NavLink>
-        <NavLink to="/projects" className={navClass}>
-          Projects
-        </NavLink>
-        <NavLink to="/contact" className={navClass}>
-          Contact
-        </NavLink>
-      </nav>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="primary-nav"
+            className="mobile-menu-button md:hidden"
+          >
+            <i className={menuOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars"} />
+            <span className="sr-only">Menyu</span>
+          </button>
+        </div>
 
-      <div className="flex items-center gap-3">
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[var(--bg)] md:flex"
-          aria-label="Toggle theme"
-        >
-          <img
-            src={isDark ? "/Sun_mode.svg" : "/Dark_mode.svg"}
-            alt="Mode icon"
-            className="h-6 w-6"
-          />
-        </button>
-        <Link
-          to="/login"
-          className="inline-flex items-center gap-3 rounded-full bg-[var(--login-color)] px-6 py-3 font-semibold text-white transition hover:opacity-90"
-        >
-          Login
-          <i className="fa-solid fa-right-to-bracket" />
-        </Link>
-      </div>
-    </header>
+        <nav id="primary-nav" className="primary-nav" data-open={menuOpen}>
+          <div className="primary-nav-inner flex flex-col gap-4 pt-2 text-lg font-semibold md:flex-row md:items-center md:gap-8 md:pt-0 md:text-base">
+            {NAV_LINKS.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.end}
+                onClick={closeMenu}
+                className="nav-link"
+              >
+                {link.label}
+              </NavLink>
+            ))}
+
+            <div className="flex items-center gap-3 pt-2 md:hidden">
+              <ThemeToggleButton isDark={isDark} toggleTheme={toggleTheme} />
+              <Link to="/login" className="login-button flex-1" onClick={closeMenu}>
+                Login
+                <i className="fa-solid fa-right-to-bracket" />
+              </Link>
+            </div>
+          </div>
+        </nav>
+
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggleButton isDark={isDark} toggleTheme={toggleTheme} />
+          <Link to="/login" className="login-button">
+            Login
+            <i className="fa-solid fa-right-to-bracket" />
+          </Link>
+        </div>
+      </header>
+    </FadeInUp>
   );
 }

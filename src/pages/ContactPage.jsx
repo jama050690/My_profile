@@ -1,28 +1,7 @@
 import PortfolioHeader from "../components/PortfolioHeader";
+import PortfolioFooter from "../components/PortfolioFooter";
+import { socialLinks } from "../data/social";
 import { useTheme } from "../hooks/useTheme";
-
-const socialLinks = [
-  {
-    href: "https://t.me/Jama_9133",
-    icon: "fa-brands fa-telegram",
-    label: "Telegram",
-  },
-  {
-    href: "https://www.linkedin.com/in/jamshiddin-babajonov-168705382/",
-    icon: "fa-brands fa-linkedin",
-    label: "LinkedIn",
-  },
-  {
-    href: "https://github.com/jama050690",
-    icon: "fa-brands fa-square-github",
-    label: "GitHub",
-  },
-  {
-    href: "https://wa.me/998957990034",
-    icon: "fa-brands fa-whatsapp",
-    label: "WhatsApp",
-  },
-];
 
 export default function ContactPage() {
   const { isDark, toggleTheme } = useTheme();
@@ -63,7 +42,37 @@ export default function ContactPage() {
             ))}
           </div>
         </section>
+
+        <section className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="stack-card">
+            <span className="stack-card-icon">
+              <i className="fa-solid fa-envelope" />
+            </span>
+            <p className="mt-4 text-lg font-black">Email</p>
+            <a className="profile-copy mt-2 block text-base" href="mailto:jbm050690@gmail.com">
+              jbm050690@gmail.com
+            </a>
+          </div>
+
+          <div className="stack-card">
+            <span className="stack-card-icon">
+              <i className="fa-solid fa-location-dot" />
+            </span>
+            <p className="mt-4 text-lg font-black">Manzil</p>
+            <p className="profile-copy mt-2 text-base">Toshkent, O'zbekiston</p>
+          </div>
+
+          <div className="stack-card">
+            <span className="stack-card-icon">
+              <i className="fa-solid fa-circle-check" />
+            </span>
+            <p className="mt-4 text-lg font-black">Holat</p>
+            <p className="profile-copy mt-2 text-base">Yangi loyihalar uchun ochiqman</p>
+          </div>
+        </section>
       </main>
+
+      <PortfolioFooter />
     </div>
   );
 }
