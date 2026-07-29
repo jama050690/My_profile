@@ -1,51 +1,35 @@
 import { useEffect, useState } from "react";
-import { githubRepos, githubUsername } from "../data/githubRepos";
+import { githubRepoCount, githubUsername, isFeaturedRepo } from "../data/githubRepos";
 import GithubRepoCard from "./GithubRepoCard";
 import RevealOnScroll from "./motion/RevealOnScroll";
 
-function toCardData(repo, apiData) {
-  if (repo.manual) {
-    return {
-      name: repo.manual.name,
-      description: repo.manual.description,
-      language: repo.manual.language,
-      stars: repo.manual.stargazers_count,
-      url: repo.manual.html_url,
-    };
-  }
-  if (!apiData) return null;
+function toCardData(repo) {
   return {
-    name: apiData.name,
-    description: apiData.description,
-    language: apiData.language,
-    stars: apiData.stargazers_count,
-    url: apiData.html_url,
+    name: repo.name,
+    description: repo.description,
+    language: repo.language,
+    stars: repo.stargazers_count,
+    url: repo.html_url,
   };
 }
 
 export default function GithubActivitySection() {
-  const [cards, setCards] = useState(() =>
-    githubRepos.map((repo) => toCardData(repo, null)).filter(Boolean)
-  );
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     let cancelled = false;
 
-    Promise.all(
-      githubRepos.map(async (repo) => {
-        if (repo.manual) return toCardData(repo, null);
-        try {
-          const res = await fetch(`https://api.github.com/repos/${repo.owner}/${repo.repo}`);
-          if (!res.ok) return null;
-          const data = await res.json();
-          return toCardData(repo, data);
-        } catch {
-          return null;
-        }
+    fetch(
+      `https://api.github.com/users/${githubUsername}/repos?type=public&sort=pushed&direction=desc&per_page=20`
+    )
+      .then((res) => (res.ok ? res.json() : []))
+      .then((repos) => {
+        if (cancelled || !Array.isArray(repos)) return;
+        setCards(repos.filter(isFeaturedRepo).slice(0, githubRepoCount).map(toCardData));
       })
-    ).then((results) => {
-      if (!cancelled) setCards(results.filter(Boolean));
-    });
+      .catch(() => {
+        if (!cancelled) setCards([]);
+      });
 
     return () => {
       cancelled = true;

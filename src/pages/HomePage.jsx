@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PortfolioHeader from "../components/PortfolioHeader";
 import PortfolioFooter from "../components/PortfolioFooter";
 import ProjectCard from "../components/ProjectCard";
+import GithubStatCard from "../components/GithubStatCard";
 import CodeTerminal from "../components/motion/CodeTerminal";
 import FadeInUp from "../components/motion/FadeInUp";
 import RevealOnScroll from "../components/motion/RevealOnScroll";
@@ -47,8 +48,12 @@ export default function HomePage() {
             </FadeInUp>
           </div>
 
-          <FadeInUp delay={200} className="relative z-10 justify-self-center md:justify-self-end">
+          <FadeInUp
+            delay={200}
+            className="relative z-10 flex flex-col items-center gap-5 justify-self-center md:items-end md:justify-self-end"
+          >
             <CodeTerminal />
+            <GithubStatCard />
           </FadeInUp>
         </section>
 

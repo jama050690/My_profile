@@ -1,21 +1,15 @@
 export const githubUsername = "jama050690";
 
-// Repos to feature in the GitHub Activity section. `owner`/`repo` are fetched
-// live from the GitHub REST API at render time. A repo can instead ship a
-// `manual` object (used as-is, no fetch) for cases the API can't serve —
-// e.g. PrimeAvto.uz, which 404s on api.github.com/repos even though it's
-// clonable over git (likely a GitHub-side indexing lag on their end).
-export const githubRepos = [
-  { owner: githubUsername, repo: "Mini_instagram_clone_monorope" },
-  {
-    owner: githubUsername,
-    repo: "PrimeAvto.uz",
-    manual: {
-      name: "PrimeAvto.uz",
-      description: "Avtomobil savdo/ijaraga olish platformasi",
-      language: "TypeScript",
-      stargazers_count: 0,
-      html_url: `https://github.com/${githubUsername}/PrimeAvto.uz`,
-    },
-  },
-];
+// How many repo cards to show in the "Repolarim" grid.
+export const githubRepoCount = 6;
+
+// This portfolio site's own repo — excluded so the site doesn't list
+// itself as one of "my projects".
+const excludedRepoNames = new Set(["My_profile", "My_profile-main"]);
+
+// Decides whether a repo returned by the GitHub API should be featured:
+// forks and the portfolio's own repo are filtered out, everything else
+// (already public + already sorted by push date by the API call) qualifies.
+export function isFeaturedRepo(repo) {
+  return !repo.fork && !excludedRepoNames.has(repo.name);
+}
