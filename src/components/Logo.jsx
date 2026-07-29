@@ -42,6 +42,12 @@ export default function Logo({ className = "" }) {
       <span className="logo-wordmark hidden sm:inline">
         JB<span className="text-[var(--accent)]">.dev</span>
       </span>
+      <img
+        className="logo-avatar"
+        src="/photo_2025-11-21_19-33-24.jpg"
+        alt=""
+        aria-hidden="true"
+      />
     </Link>
   );
 }

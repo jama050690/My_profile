@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
+import Logo from "../components/Logo";
 import PortfolioFooter from "../components/PortfolioFooter";
 import { getProjectBySlug } from "../data/projects";
 import { useTheme } from "../hooks/useTheme";
@@ -16,7 +17,7 @@ export default function ProjectPage() {
     <div className="px-5 py-6 md:px-8">
       <header className="container flex flex-col gap-6 rounded-[32px] glass-card px-6 py-5 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4">
-          <img className="logo h-[88px] w-[176px]" src="/logoa-2.png" alt="Logo" />
+          <Logo />
           <div>
             <p className="section-kicker text-cyan-600">Project Case Study</p>
             <h1 className="mt-2 text-3xl font-black md:text-4xl">{project.title}</h1>

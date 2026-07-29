@@ -15,7 +15,7 @@ export const socialLinks = [
     label: "GitHub",
   },
   {
-    href: "https://wa.me/998957990034",
+    href: "https://wa.me/998889239005",
     icon: "fa-brands fa-whatsapp",
     label: "WhatsApp",
   },

@@ -6,7 +6,6 @@ export const githubUsername = "jama050690";
 // e.g. PrimeAvto.uz, which 404s on api.github.com/repos even though it's
 // clonable over git (likely a GitHub-side indexing lag on their end).
 export const githubRepos = [
-  { owner: githubUsername, repo: "mini-instagram" },
   { owner: githubUsername, repo: "Mini_instagram_clone_monorope" },
   {
     owner: githubUsername,

@@ -23,13 +23,13 @@ export default function ContactPage() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <a className="contact-method" href="tel:+998957990034">
+              <a className="contact-method" href="tel:+998889239005">
                 <span className="contact-method-icon">
                   <i className="fa-solid fa-phone" />
                 </span>
                 <span>
                   <span className="contact-method-label">Telefon</span>
-                  <span className="contact-method-value">+998 95 799 00 34</span>
+                  <span className="contact-method-value">+998 88 923 90 05</span>
                 </span>
               </a>
 

@@ -43,12 +43,13 @@ export default function AboutPage() {
             </div>
 
             <a
-              href="/Babajonov_Jamshiddin_Resume_dev.docx"
-              download
+              href="/Babajonov_Jamshiddin_Maxsudovich_FlowCV_Resume_2026-06-09.pdf"
+              target="_blank"
+              rel="noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--login-color)] px-6 py-3 font-semibold text-white transition hover:opacity-90"
             >
-              Resume yuklab olish
-              <i className="fa-solid fa-download" />
+              CV'ni ko'rish
+              <i className="fa-solid fa-arrow-up-right-from-square" />
             </a>
           </article>
         </FadeInSide>

@@ -515,6 +515,22 @@ img.logo {
   letter-spacing: -0.01em;
 }
 
+.logo-avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border: 1.5px solid color-mix(in srgb, var(--text-color) 16%, transparent);
+  transition: border-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.logo-lockup:hover .logo-avatar,
+.logo-lockup:focus-visible .logo-avatar {
+  border-color: var(--accent);
+}
+
 /* Sticky header: resting state is a floating pill (elevation-1); past the
    scroll threshold it condenses, gains a heavier frosted blur and moves to
    elevation-2 — one 200ms transition, no layout-affecting properties. */
