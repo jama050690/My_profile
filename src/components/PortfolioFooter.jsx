@@ -1,22 +1,40 @@
+import { Link } from "react-router-dom";
 import { socialLinks } from "../data/social";
+import Logo from "./Logo";
+
+const FOOTER_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/projects", label: "Projects" },
+  { to: "/contact", label: "Contact" },
+];
 
 export default function PortfolioFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="container mt-16 pb-8">
-      <div className="editorial-card flex flex-col gap-6 rounded-[32px] px-7 py-7 md:flex-row md:items-center md:justify-between">
+    <footer className="site-footer container mt-16 pb-8 pt-8">
+      <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
         <div>
-          <p className="text-lg font-black">Jamshiddin Babajonov</p>
-          <p className="profile-copy mt-1 text-sm">
+          <Logo />
+          <p className="profile-copy mt-3 max-w-xs text-sm leading-6">
             Frontend Developer &middot; Toshkent, O‘zbekiston
           </p>
         </div>
+
+        <nav className="flex flex-col gap-3 text-sm font-semibold md:flex-row md:items-center md:gap-8">
+          {FOOTER_LINKS.map((link) => (
+            <Link key={link.to} to={link.to} className="nav-link">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
         <div className="flex items-center gap-3">
           {socialLinks.map((link) => (
             <a
               key={link.href}
-              className="social"
+              className="footer-social"
               href={link.href}
               target="_blank"
               rel="noreferrer"
@@ -27,9 +45,15 @@ export default function PortfolioFooter() {
           ))}
         </div>
       </div>
-      <p className="profile-copy mt-6 text-center text-sm">
-        © {year} Jamshiddin Babajonov. Barcha huquqlar himoyalangan.
-      </p>
+
+      <div className="mt-8 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
+        <p className="profile-copy text-sm">
+          © {year} Jamshiddin Babajonov. Barcha huquqlar himoyalangan.
+        </p>
+        <p className="font-mono text-xs text-[color:var(--text-color-2)]">
+          Built with React &amp; Tailwind
+        </p>
+      </div>
     </footer>
   );
 }

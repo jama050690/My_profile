@@ -161,9 +161,37 @@ img.logo {
 }
 
 .editorial-card {
+  position: relative;
+  overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--text-color) 8%, transparent);
   background: color-mix(in srgb, var(--bgc) 94%, transparent);
   box-shadow: var(--surface-shadow);
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    box-shadow var(--motion-duration-base) var(--motion-ease-standard),
+    border-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.editorial-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -40px -60px auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  pointer-events: none;
+}
+
+.editorial-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: var(--surface-shadow), 0 0 32px var(--accent-soft);
+}
+
+/* Button gains emphasis when its parent project card is hovered. */
+.project-card-strong:hover .btn-primary,
+.editorial-card:hover .btn-primary {
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 .portrait-frame {
@@ -209,9 +237,12 @@ img.logo {
   position: relative;
   overflow: hidden;
   border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(145deg, #082f49, #0f172a);
   color: white;
   box-shadow: 0 30px 80px rgba(2, 6, 23, 0.25);
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    box-shadow var(--motion-duration-base) var(--motion-ease-standard);
 }
 
 .project-card-strong::after {
@@ -222,11 +253,95 @@ img.logo {
   height: 180px;
   border-radius: 999px;
   background: rgba(34, 211, 238, 0.14);
+  pointer-events: none;
+}
+
+.project-card-strong:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 80px rgba(2, 6, 23, 0.35), 0 0 40px var(--accent-soft);
+}
+
+/* Featured badge — subtle, monospace, sits on the flagship card only. */
+.featured-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--font-mono-family);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ecfeff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
 }
 
 .contact-panel {
   background: linear-gradient(135deg, #0ea5e9, #22c55e);
   box-shadow: 0 25px 60px rgba(14, 165, 233, 0.22);
+}
+
+/* A contact method row (phone/email) sitting directly on the gradient
+   panel — translucent glass so it reads on either end of the gradient,
+   rather than a floating bare text line. */
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #04121c;
+  text-decoration: none;
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    background-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.contact-method:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.contact-method:focus-visible {
+  outline: 2px solid #04121c;
+  outline-offset: 3px;
+}
+
+.contact-method-icon {
+  display: inline-flex;
+  height: 44px;
+  width: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.contact-method-label {
+  display: block;
+  font-family: var(--font-mono-family);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(4, 18, 28, 0.65);
+}
+
+.contact-method-value {
+  display: block;
+  margin-top: 2px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  word-break: break-word;
 }
 
 .glass-card {
@@ -343,6 +458,30 @@ img.logo {
 .fade-in-up[data-visible="true"] {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Used by FadeInSide for the About page — text/photo enter from opposite
+   horizontal edges on load, same opacity+transform-only mechanism as
+   .fade-in-up above. */
+.fade-in-left,
+.fade-in-right {
+  opacity: 0;
+  transition: opacity var(--motion-duration-slow) var(--motion-ease-emphasized),
+    transform var(--motion-duration-slow) var(--motion-ease-emphasized);
+}
+
+.fade-in-left {
+  transform: translateX(-28px);
+}
+
+.fade-in-right {
+  transform: translateX(28px);
+}
+
+.fade-in-left[data-visible="true"],
+.fade-in-right[data-visible="true"] {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* Logo lockup — the mark uses currentColor, so one asset works on both
@@ -484,6 +623,195 @@ img.logo {
   outline-offset: 3px;
 }
 
+/* Hero card — same dark panel language as .project-card-strong, plus a
+   hairline border, a very low-opacity diagonal sheen, and a soft accent
+   corner glow. Kept as its own class (not a project-card-strong edit) so
+   ProjectCard.jsx's use of that class is untouched. */
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-token-xl);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(145deg, #082f49, #0f172a);
+  color: white;
+  box-shadow: var(--shadow-elevation-2);
+}
+
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 55%);
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -60px -80px auto;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.1);
+  filter: blur(10px);
+}
+
+/* Button system — one shared shape/motion contract; primary is an accent
+   fill, secondary an outline. Fixed (non-token) colours on purpose: these
+   render on the always-dark hero card, independent of the site's light/dark
+   toggle, matching the existing .tag-pill.on-dark precedent. */
+.btn-primary,
+.btn-secondary {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: transform var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-base) var(--motion-ease-standard),
+    border-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.btn-primary {
+  background: #22d3ee;
+  color: #022c35;
+}
+
+.btn-primary:hover {
+  background: #67e8f9;
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Hero code-terminal mockup — restrained "developer" motif filling the
+   hero's empty right side. Cursor blink is opacity-only and is already
+   neutralised by the global prefers-reduced-motion rule above. */
+.code-terminal {
+  width: min(360px, 100%);
+  border-radius: var(--radius-token-md);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(2, 6, 23, 0.55);
+  box-shadow: var(--shadow-elevation-2);
+}
+
+.code-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.code-terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.code-terminal-dot-red {
+  background: #f87171;
+}
+
+.code-terminal-dot-yellow {
+  background: #facc15;
+}
+
+.code-terminal-dot-green {
+  background: #4ade80;
+}
+
+.code-terminal-title {
+  margin-left: 6px;
+  font-family: var(--font-mono-family);
+  font-size: 0.75rem;
+  color: rgba(226, 232, 240, 0.5);
+}
+
+.code-terminal-body {
+  padding: 18px 20px 22px;
+  font-family: var(--font-mono-family);
+  font-size: 0.8rem;
+  line-height: 1.85;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-terminal-line {
+  display: block;
+}
+
+.code-token-kw {
+  color: #c084fc;
+}
+
+.code-token-fn {
+  color: #67e8f9;
+}
+
+.code-token-str {
+  color: #86efac;
+}
+
+.code-token-tag {
+  color: #f472b6;
+}
+
+.code-token-attr {
+  color: #fbbf24;
+}
+
+.code-token-param,
+.code-token-plain,
+.code-token-punct {
+  color: #e2e8f0;
+}
+
+.code-token-comment {
+  color: rgba(148, 163, 184, 0.8);
+}
+
+.code-terminal-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 15px;
+  margin-left: 2px;
+  background: #22d3ee;
+  vertical-align: -2px;
+  animation: code-cursor-blink 1.1s step-end infinite;
+}
+
+@keyframes code-cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
 .hero-photo {
   box-shadow: var(--surface-shadow);
 }
@@ -562,6 +890,55 @@ img.logo {
   border: 1px solid rgba(8, 47, 73, 0.14);
   border-radius: 999px;
   box-shadow: 0 14px 30px rgba(8, 47, 73, 0.24);
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    background-color var(--motion-duration-base) var(--motion-ease-standard),
+    color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.social:hover {
+  transform: translateY(-3px);
+  background: #22d3ee;
+  color: #022c35;
+}
+
+.social:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border-hairline);
+}
+
+/* Footer social icons are muted by default (unlike .social on the contact
+   gradient, which needs a solid fill for contrast) — plain hairline ring
+   that brightens to the accent on hover/focus. */
+.footer-social {
+  display: inline-flex;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--text-color-2);
+  border: 1px solid var(--border-hairline);
+  background: transparent;
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    color var(--motion-duration-base) var(--motion-ease-standard),
+    border-color var(--motion-duration-base) var(--motion-ease-standard),
+    background-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.footer-social:hover {
+  transform: translateY(-3px);
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.footer-social:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .social.wide {
@@ -587,11 +964,21 @@ img.logo {
   align-items: center;
   border-radius: 999px;
   padding: 8px 20px;
-  font-size: 0.875rem;
+  font-family: var(--font-mono-family);
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-color-2);
-  border: 1px solid color-mix(in srgb, var(--text-color) 12%, transparent);
-  background: color-mix(in srgb, var(--bgc) 92%, transparent);
+  border: 1px solid var(--border-hairline);
+  background: var(--surface-2);
+  transition: transform var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.skill-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .cta-panel {
@@ -653,17 +1040,66 @@ img.logo {
   background: color-mix(in srgb, var(--bgc) 94%, transparent);
   box-shadow: var(--surface-shadow);
   padding: 28px;
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    border-color var(--motion-duration-base) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.stack-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-soft);
+  box-shadow: var(--surface-shadow), 0 0 24px var(--accent-soft);
 }
 
 .stack-card-icon {
   display: inline-flex;
   height: 40px;
   width: 40px;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
   background: color-mix(in srgb, var(--login-color) 16%, transparent);
   color: var(--login-color);
+}
+
+/* Tech pills used inside the stack-card groups on the homepage — a
+   dedicated class rather than reusing .tag-pill, since these need their
+   own scroll-cascade + hover-lift behaviour without affecting the plain
+   informational tag pills on project/repo cards. The entrance state is
+   expressed through --pill-y/--pill-o custom properties (rather than
+   .stack-pill directly setting transform/opacity) so the ancestor reveal
+   rule below never out-specificities the :hover rule's own transform. */
+.stack-pill {
+  --pill-y: 6px;
+  --pill-o: 0;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-family: var(--font-mono-family);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-color-2);
+  border: 1px solid var(--border-hairline);
+  background: var(--surface-2);
+  opacity: var(--pill-o);
+  transform: translateY(var(--pill-y));
+  transition: opacity var(--motion-duration-base) var(--motion-ease-emphasized),
+    transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard),
+    background-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.fade-in-up[data-visible="true"] .stack-pill {
+  --pill-y: 0px;
+  --pill-o: 1;
+}
+
+.stack-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 input,
@@ -696,4 +1132,135 @@ textarea:focus {
   .project-shelf {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* GitHub repo cards — terminal aesthetic, elevated above the page surface
+   (same token language as .stack-card), with an accent lift on hover.
+   Transform/box-shadow only, so the hover motion stays GPU-friendly. */
+.repo-card {
+  overflow: hidden;
+  border-radius: var(--radius-token-md);
+  border: 1px solid var(--border-hairline);
+  background: color-mix(in srgb, var(--bgc) 94%, transparent);
+  box-shadow: var(--shadow-elevation-1);
+  transition: transform var(--motion-duration-base) var(--motion-ease-emphasized),
+    box-shadow var(--motion-duration-base) var(--motion-ease-standard),
+    border-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.repo-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-elevation-2), 0 0 0 1px var(--accent-soft), 0 0 32px var(--accent-soft);
+}
+
+.repo-card-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-hairline);
+  background: var(--surface-2);
+}
+
+.repo-card-path {
+  margin-left: 4px;
+  display: inline-flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repo-card-glyph {
+  color: var(--accent);
+  font-size: 0.75rem;
+}
+
+.repo-card-stars {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono-family);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.repo-card-stars i {
+  color: #facc15;
+  font-size: 0.7rem;
+}
+
+.repo-card-body {
+  padding: 18px 20px 20px;
+}
+
+.repo-card-description {
+  min-height: 44px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-color-2);
+}
+
+.repo-card-language {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-color-2);
+  border: 1px solid var(--border-hairline);
+  background: var(--surface-2);
+}
+
+.repo-card-language-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.repo-card-source {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono-family);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.repo-card-source:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.repo-card-source i {
+  font-size: 0.7rem;
+}
+
+/* Secondary button, but theme-aware (unlike .btn-secondary, which is fixed
+   for use on the always-dark hero card) — for use directly on the page
+   surface, where colours must follow the light/dark toggle. */
+.btn-secondary-onlight {
+  border-color: var(--border-hairline);
+  color: var(--text-color);
+}
+
+.btn-secondary-onlight:hover {
+  background: var(--surface-2);
 }
