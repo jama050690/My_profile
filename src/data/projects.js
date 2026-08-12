@@ -41,6 +41,27 @@ export const projects = [
       "Portfolio ichida case-study ko‘rinishida taqdim etiladi",
     ],
   },
+  {
+    slug: "my-profile",
+    title: "My Profile — Portfolio",
+    description:
+      "Ushbu portfolio saytining o‘zi. React, Vite va Tailwind CSS asosida qurilgan, GitHub Actions orqali avtomatik deploy qilinadi.",
+    stack: "React, Vite, Tailwind CSS",
+    tags: ["React", "Vite", "Tailwind CSS", "GitHub Actions"],
+    icon: "fa-solid fa-laptop-code",
+    accent: ["#8b5cf6", "#0f172a"],
+    liveUrl: "https://jamshiddin.uz",
+    repoUrl: "https://github.com/jama050690/My_profile",
+    year: "2026",
+    role: "Frontend Developer",
+    summary:
+      "Loyihalarim, ko‘nikmalarim va GitHub faoliyatimni bitta joyda taqdim etuvchi shaxsiy portfolio sayti.",
+    highlights: [
+      "GitHub REST API orqali jonli repository statistikasi va so‘nggi push qilingan loyihalar",
+      "GitHub Actions yordamida avtomatik build va custom domenga (jamshiddin.uz) deploy",
+      "Scroll asosidagi reveal animatsiyalar va dark/light rejim almashtirish",
+    ],
+  },
 ];
 
 export function getProjectBySlug(slug) {
