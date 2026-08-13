@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../hooks/LanguageContext";
 
 export default function Logo({ className = "" }) {
+  const { t } = useLanguage();
+
   return (
     <Link
       to="/"
       className={`logo-lockup ${className}`}
-      aria-label="Jamshiddin Babajonov — Bosh sahifa"
+      aria-label={t("nav.logoAriaLabel")}
     >
       <svg
         className="logo-mark"

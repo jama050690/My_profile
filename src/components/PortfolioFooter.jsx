@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import { socialLinks } from "../data/social";
 import Logo from "./Logo";
-
-const FOOTER_LINKS = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/projects", label: "Projects" },
-  { to: "/contact", label: "Contact" },
-];
+import { useLanguage } from "../hooks/LanguageContext";
 
 export default function PortfolioFooter() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
+
+  const footerLinks = [
+    { to: "/", label: t("nav.home") },
+    { to: "/about", label: t("nav.about") },
+    { to: "/projects", label: t("nav.projects") },
+    { to: "/contact", label: t("nav.contact") },
+  ];
 
   return (
     <footer className="site-footer container mt-16 pb-8 pt-8">
@@ -18,12 +20,12 @@ export default function PortfolioFooter() {
         <div>
           <Logo />
           <p className="profile-copy mt-3 max-w-xs text-sm leading-6">
-            Frontend &amp; Backend Developer &middot; Toshkent, O‘zbekiston
+            {t("about.role")} &middot; Toshkent, O‘zbekiston
           </p>
         </div>
 
         <nav className="flex flex-col gap-3 text-sm font-semibold md:flex-row md:items-center md:gap-8">
-          {FOOTER_LINKS.map((link) => (
+          {footerLinks.map((link) => (
             <Link key={link.to} to={link.to} className="nav-link">
               {link.label}
             </Link>
@@ -48,10 +50,10 @@ export default function PortfolioFooter() {
 
       <div className="mt-8 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
         <p className="profile-copy text-sm">
-          © {year} Jamshiddin Babajonov. Barcha huquqlar himoyalangan.
+          © {year} Jamshiddin Babajonov. {t("footer.rights")}
         </p>
         <p className="font-mono text-xs text-[color:var(--text-color-2)]">
-          Built with React &amp; Tailwind
+          {t("footer.builtWith")}
         </p>
       </div>
     </footer>

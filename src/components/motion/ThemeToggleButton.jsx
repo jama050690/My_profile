@@ -1,9 +1,13 @@
+import { useLanguage } from "../../hooks/LanguageContext";
+
 export default function ThemeToggleButton({ isDark, toggleTheme, className = "" }) {
+  const { t } = useLanguage();
+
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label="Mavzuni almashtirish"
+      aria-label={t("profile.toggleTheme")}
       aria-pressed={isDark}
       className={`theme-toggle ${className}`}
     >

@@ -446,6 +446,34 @@ img.logo {
   width: 20px;
 }
 
+/* Language toggle — mirrors theme-toggle sizing/shape. */
+.language-toggle {
+  display: inline-flex;
+  height: 48px;
+  min-width: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border-hairline);
+  padding: 0 14px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: border-color var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.language-toggle:hover {
+  border-color: var(--accent);
+}
+
+.language-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 /* Small entrance used by FadeInUp — opacity + translateY only, so it never
    triggers layout/reflow and can't cause load-time layout shift. */
 .fade-in-up {

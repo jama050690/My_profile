@@ -2,9 +2,11 @@ import PortfolioHeader from "../components/PortfolioHeader";
 import PortfolioFooter from "../components/PortfolioFooter";
 import { socialLinks } from "../data/social";
 import { useTheme } from "../hooks/useTheme";
+import { useLanguage } from "../hooks/LanguageContext";
 
 export default function ContactPage() {
   const { isDark, toggleTheme } = useTheme();
+  const { t } = useLanguage();
 
   return (
     <div className="px-5 py-6 md:px-8">
@@ -14,11 +16,10 @@ export default function ContactPage() {
         <section className="contact-panel rounded-[36px] px-7 py-8 text-black md:px-10 md:py-10">
           <div className="grid gap-8 md:grid-cols-[1.15fr_1fr] md:items-center">
             <div>
-              <p className="section-kicker font-mono text-black/90">Contact</p>
-              <h1 className="mt-3 text-3xl font-black md:text-5xl">Men bilan bog‘laning</h1>
+              <p className="section-kicker font-mono text-black/90">{t("contact.kicker")}</p>
+              <h1 className="mt-3 text-3xl font-black md:text-5xl">{t("contact.title")}</h1>
               <p className="mt-4 max-w-xl text-base leading-7 text-black/90">
-                Hamkorlik, ish taklifi yoki loyiha bo‘yicha aloqaga chiqmoqchi
-                bo‘lsangiz, quyidagi kontaktlar orqali bog‘lanishingiz mumkin.
+                {t("contact.description")}
               </p>
             </div>
 
@@ -28,7 +29,7 @@ export default function ContactPage() {
                   <i className="fa-solid fa-phone" />
                 </span>
                 <span>
-                  <span className="contact-method-label">Telefon</span>
+                  <span className="contact-method-label">{t("contact.phoneLabel")}</span>
                   <span className="contact-method-value">+998 88 923 90 05</span>
                 </span>
               </a>
@@ -38,7 +39,7 @@ export default function ContactPage() {
                   <i className="fa-solid fa-envelope" />
                 </span>
                 <span>
-                  <span className="contact-method-label">Email</span>
+                  <span className="contact-method-label">{t("contact.emailLabel")}</span>
                   <span className="contact-method-value">jbm050690@gmail.com</span>
                 </span>
               </a>
@@ -66,7 +67,7 @@ export default function ContactPage() {
             <span className="stack-card-icon">
               <i className="fa-solid fa-envelope" />
             </span>
-            <p className="mt-4 text-lg font-black">Email</p>
+            <p className="mt-4 text-lg font-black">{t("contact.emailLabel")}</p>
             <a className="profile-copy mt-2 block text-base" href="mailto:jbm050690@gmail.com">
               jbm050690@gmail.com
             </a>
@@ -76,7 +77,7 @@ export default function ContactPage() {
             <span className="stack-card-icon">
               <i className="fa-solid fa-location-dot" />
             </span>
-            <p className="mt-4 text-lg font-black">Manzil</p>
+            <p className="mt-4 text-lg font-black">{t("contact.addressLabel")}</p>
             <p className="profile-copy mt-2 text-base">Toshkent, O‘zbekiston</p>
           </div>
 
@@ -84,8 +85,8 @@ export default function ContactPage() {
             <span className="stack-card-icon">
               <i className="fa-solid fa-circle-check" />
             </span>
-            <p className="mt-4 text-lg font-black">Holat</p>
-            <p className="profile-copy mt-2 text-base">Yangi loyihalar uchun ochiqman</p>
+            <p className="mt-4 text-lg font-black">{t("contact.statusLabel")}</p>
+            <p className="profile-copy mt-2 text-base">{t("contact.statusText")}</p>
           </div>
         </section>
       </main>

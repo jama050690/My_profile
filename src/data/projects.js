@@ -2,64 +2,121 @@ export const projects = [
   {
     slug: "flypost-uz",
     title: "flypost.uz",
-    description:
-      "Zamonaviy frontend yechimlar asosida tayyorlangan loyiha. Foydalanuvchi uchun qulay va responsive interfeysga ega.",
-    stack: "React, Vite, Tailwind",
+    description: {
+      uz: "Zamonaviy frontend yechimlar asosida tayyorlangan loyiha. Foydalanuvchi uchun qulay va responsive interfeysga ega.",
+      en: "A project built with modern frontend solutions, featuring a user-friendly, responsive interface.",
+    },
+    stack: {
+      uz: "React, Vite, Tailwind",
+      en: "React, Vite, Tailwind",
+    },
     tags: ["React", "Vite", "Tailwind CSS"],
     icon: "fa-solid fa-bolt",
     accent: ["#0ea5e9", "#0f172a"],
     liveUrl: "https://flypost.uz",
     repoUrl: "",
     year: "2026",
-    role: "Frontend Developer",
-    summary:
-      "Flypost uchun tezkor, sodda va foydalanuvchiga yo‘naltirilgan web tajriba yaratishga qaratilgan loyiha.",
+    role: {
+      uz: "Frontend dasturchi",
+      en: "Frontend Developer",
+    },
+    summary: {
+      uz: "Flypost uchun tezkor, sodda va foydalanuvchiga yo‘naltirilgan web tajriba yaratishga qaratilgan loyiha.",
+      en: "A project focused on creating a fast, simple, and user-centered web experience for Flypost.",
+    },
     highlights: [
-      "Responsive va tez ishlaydigan landing page",
-      "Toza vizual hierarchy va kuchli CTA bloklari",
-      "Deploy uchun tayyor React frontend arxitekturasi",
+      {
+        uz: "Responsive va tez ishlaydigan landing page",
+        en: "Responsive, fast-loading landing page",
+      },
+      {
+        uz: "Toza vizual hierarchy va kuchli CTA bloklari",
+        en: "Clean visual hierarchy and strong CTA blocks",
+      },
+      {
+        uz: "Deploy uchun tayyor React frontend arxitekturasi",
+        en: "Deploy-ready React frontend architecture",
+      },
     ],
   },
   {
     slug: "bootchat",
     title: "Bootchat",
-    description:
-      "Chat va aloqa jarayonlarini soddalashtirishga qaratilgan loyiha. Alohida live link orqali ishga tushadi.",
-    stack: "External Project",
+    description: {
+      uz: "Chat va aloqa jarayonlarini soddalashtirishga qaratilgan loyiha. Alohida live link orqali ishga tushadi.",
+      en: "A project focused on simplifying chat and communication flows. Runs via a separate live link.",
+    },
+    stack: {
+      uz: "Tashqi loyiha",
+      en: "External Project",
+    },
     tags: ["Chat", "Live Deploy"],
     icon: "fa-solid fa-comments",
     accent: ["#14b8a6", "#082f49"],
     liveUrl: "https://jamshiddin.uz/bootchat.uz",
     repoUrl: "",
     year: "2026",
-    role: "Web Developer",
-    summary:
-      "Bootchat muloqot jarayonini soddalashtirish va foydalanuvchiga tushunarli digital tajriba berishga qaratilgan loyiha.",
+    role: {
+      uz: "Veb-dasturchi",
+      en: "Web Developer",
+    },
+    summary: {
+      uz: "Bootchat muloqot jarayonini soddalashtirish va foydalanuvchiga tushunarli digital tajriba berishga qaratilgan loyiha.",
+      en: "A project focused on simplifying the Bootchat communication flow and delivering a clear digital experience to users.",
+    },
     highlights: [
-      "Alohida loyiha sahifasi va launch linki",
-      "Qulay foydalanish uchun soddalashtirilgan UI",
-      "Portfolio ichida case-study ko‘rinishida taqdim etiladi",
+      {
+        uz: "Alohida loyiha sahifasi va launch linki",
+        en: "Dedicated project page and launch link",
+      },
+      {
+        uz: "Qulay foydalanish uchun soddalashtirilgan UI",
+        en: "Simplified UI for easy use",
+      },
+      {
+        uz: "Portfolio ichida case-study ko‘rinishida taqdim etiladi",
+        en: "Presented as a case study within the portfolio",
+      },
     ],
   },
   {
     slug: "primeavto",
     title: "PrimeAvto",
-    description:
-      "Yangi va haydalgan avtomobillarni qulay topish, solishtirish va xarid qilish uchun onlayn marketplace.",
-    stack: "Next.js",
+    description: {
+      uz: "Yangi va haydalgan avtomobillarni qulay topish, solishtirish va xarid qilish uchun onlayn marketplace.",
+      en: "An online marketplace for conveniently finding, comparing, and purchasing new and used cars.",
+    },
+    stack: {
+      uz: "Next.js",
+      en: "Next.js",
+    },
     tags: ["Next.js", "React", "Marketplace"],
     icon: "fa-solid fa-car",
     accent: ["#f97316", "#0f172a"],
     liveUrl: "https://prime-avto-uz-kvq7.vercel.app/",
     repoUrl: "https://github.com/jama050690/PrimeAvto.uz",
     year: "2026",
-    role: "Frontend Developer",
-    summary:
-      "Avtomobil e’lonlari, dilerlar va avtoxizmat xizmatlarini bitta platformada jamlagan marketplace.",
+    role: {
+      uz: "Frontend dasturchi",
+      en: "Frontend Developer",
+    },
+    summary: {
+      uz: "Avtomobil e’lonlari, dilerlar va avtoxizmat xizmatlarini bitta platformada jamlagan marketplace.",
+      en: "A marketplace that brings car listings, dealers, and auto-service providers together on a single platform.",
+    },
     highlights: [
-      "E’lonlar, dilerlar va avtoxizmat bo‘limlari bitta platformada",
-      "E’lonlarni solishtirish va sevimlilarga qo‘shish funksiyasi",
-      "Next.js asosida qurilgan tezkor va SEO-ga qulay arxitektura",
+      {
+        uz: "E’lonlar, dilerlar va avtoxizmat bo‘limlari bitta platformada",
+        en: "Listings, dealers, and auto-service sections in one platform",
+      },
+      {
+        uz: "E’lonlarni solishtirish va sevimlilarga qo‘shish funksiyasi",
+        en: "Compare listings and add-to-favorites functionality",
+      },
+      {
+        uz: "Next.js asosida qurilgan tezkor va SEO-ga qulay arxitektura",
+        en: "Fast, SEO-friendly architecture built on Next.js",
+      },
     ],
   },
 ];

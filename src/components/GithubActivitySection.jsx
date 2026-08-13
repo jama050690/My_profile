@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { githubRepoCount, githubUsername, isFeaturedRepo } from "../data/githubRepos";
 import GithubRepoCard from "./GithubRepoCard";
 import RevealOnScroll from "./motion/RevealOnScroll";
+import { useLanguage } from "../hooks/LanguageContext";
 
 function toCardData(repo) {
   return {
@@ -14,6 +15,7 @@ function toCardData(repo) {
 }
 
 export default function GithubActivitySection() {
+  const { t } = useLanguage();
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -42,8 +44,8 @@ export default function GithubActivitySection() {
     <section className="mt-8">
       <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="section-kicker font-mono text-cyan-600">GitHub Activity</p>
-          <h2 className="mt-2 text-3xl font-black">Repolarim</h2>
+          <p className="section-kicker font-mono text-cyan-600">{t("github.activityKicker")}</p>
+          <h2 className="mt-2 text-3xl font-black">{t("github.myReposTitle")}</h2>
         </div>
       </div>
 
@@ -62,7 +64,7 @@ export default function GithubActivitySection() {
           rel="noreferrer"
           className="btn-secondary btn-secondary-onlight"
         >
-          Barcha repolarni ko‘rish
+          {t("github.viewAll")}
           <i className="fa-solid fa-arrow-right" />
         </a>
       </div>

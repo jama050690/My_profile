@@ -1,3 +1,5 @@
+import { useLanguage } from "../hooks/LanguageContext";
+
 const LANGUAGE_COLORS = {
   TypeScript: "#3178c6",
   JavaScript: "#f1e05a",
@@ -10,6 +12,7 @@ const LANGUAGE_COLORS = {
 };
 
 export default function GithubRepoCard({ repo }) {
+  const { t } = useLanguage();
   const languageColor = LANGUAGE_COLORS[repo.language] || "var(--accent)";
 
   return (
@@ -32,7 +35,7 @@ export default function GithubRepoCard({ repo }) {
 
       <div className="repo-card-body">
         <p className="repo-card-description">
-          {repo.description || "Tavsif qo‘shilmagan."}
+          {repo.description || t("github.noDescription")}
         </p>
 
         {repo.language && (
@@ -48,7 +51,7 @@ export default function GithubRepoCard({ repo }) {
           rel="noreferrer"
           className="repo-card-source"
         >
-          SOURCE
+          {t("github.source").toUpperCase()}
           <i className="fa-solid fa-arrow-up-right-from-square" />
         </a>
       </div>

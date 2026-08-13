@@ -7,6 +7,8 @@ export const translations = {
       contact: "Aloqa",
       login: "Kirish",
       menu: "Menyu",
+      switchLanguage: "Tilni almashtirish",
+      logoAriaLabel: "Jamshiddin Babajonov — Bosh sahifa",
     },
     home: {
       kicker: "Portfolio",
@@ -70,6 +72,7 @@ export const translations = {
     },
     github: {
       activityKicker: "GitHub faoliyati",
+      myReposTitle: "Repolarim",
       viewAll: "Barcha repolarni ko‘rish",
       repos: "GitHub repolar",
       source: "Manba",
@@ -77,6 +80,7 @@ export const translations = {
     },
     footer: {
       builtWith: "React va Tailwind bilan qurilgan",
+      rights: "Barcha huquqlar himoyalangan.",
     },
     skills: {
       frontend: "Frontend",
@@ -160,6 +164,8 @@ export const translations = {
       contact: "Contact",
       login: "Login",
       menu: "Menu",
+      switchLanguage: "Switch language",
+      logoAriaLabel: "Jamshiddin Babajonov — Home",
     },
     home: {
       kicker: "Portfolio",
@@ -223,6 +229,7 @@ export const translations = {
     },
     github: {
       activityKicker: "GitHub Activity",
+      myReposTitle: "My Repositories",
       viewAll: "View All Repositories",
       repos: "GitHub Repos",
       source: "Source",
@@ -230,6 +237,7 @@ export const translations = {
     },
     footer: {
       builtWith: "Built with React & Tailwind",
+      rights: "All rights reserved.",
     },
     skills: {
       frontend: "Frontend",

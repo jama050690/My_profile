@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../hooks/LanguageContext";
 
 export default function ProjectCard({ project, strong = false }) {
+  const { lang, t } = useLanguage();
   const [from, to] = project.accent;
 
   return (
@@ -11,14 +13,14 @@ export default function ProjectCard({ project, strong = false }) {
           : "editorial-card flex h-full flex-col rounded-[32px] px-7 py-7"
       }
     >
-      {strong && <span className="featured-badge">Featured</span>}
+      {strong && <span className="featured-badge">{t("project.featured")}</span>}
 
       <div className="project-thumb" style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}>
         <i className={project.icon} />
       </div>
 
       <p className={`mt-5 section-kicker font-mono ${strong ? "text-cyan-300" : "text-cyan-600"}`}>
-        {project.stack}
+        {project.stack[lang]}
       </p>
       <h3 className="mt-3 text-2xl font-black">{project.title}</h3>
       <p
@@ -28,7 +30,7 @@ export default function ProjectCard({ project, strong = false }) {
             : "profile-copy mt-3 max-w-xl text-base leading-7"
         }
       >
-        {project.description}
+        {project.description[lang]}
       </p>
 
       <div className="mt-5 flex flex-wrap gap-2">
@@ -41,7 +43,7 @@ export default function ProjectCard({ project, strong = false }) {
 
       <div className="mt-auto pt-6">
         <Link to={`/projects/${project.slug}`} className="btn-primary group relative z-10">
-          View Case Study
+          {t("project.viewCaseStudy")}
           <i className="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-1" />
         </Link>
       </div>

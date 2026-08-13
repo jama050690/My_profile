@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { githubUsername } from "../data/githubRepos";
+import { useLanguage } from "../hooks/LanguageContext";
 
 export default function GithubStatCard() {
+  const { t } = useLanguage();
   const [count, setCount] = useState(null);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function GithubStatCard() {
       </span>
       <p className="mt-4 text-4xl font-black text-white">{count}+</p>
       <p className="mt-1 font-mono text-xs font-bold uppercase tracking-wider text-slate-400">
-        GitHub Repos
+        {t("github.repos")}
       </p>
     </div>
   );
