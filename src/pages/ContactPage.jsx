@@ -77,7 +77,7 @@ export default function ContactPage() {
               <i className="fa-solid fa-location-dot" />
             </span>
             <p className="mt-4 text-lg font-black">Manzil</p>
-            <p className="profile-copy mt-2 text-base">Toshkent, O'zbekiston</p>
+            <p className="profile-copy mt-2 text-base">Toshkent, O‘zbekiston</p>
           </div>
 
           <div className="stack-card">

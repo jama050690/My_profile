@@ -32,7 +32,7 @@ export default function GithubRepoCard({ repo }) {
 
       <div className="repo-card-body">
         <p className="repo-card-description">
-          {repo.description || "Tavsif qo'shilmagan."}
+          {repo.description || "Tavsif qo‘shilmagan."}
         </p>
 
         {repo.language && (

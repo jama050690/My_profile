@@ -18,7 +18,7 @@ export default function PortfolioFooter() {
         <div>
           <Logo />
           <p className="profile-copy mt-3 max-w-xs text-sm leading-6">
-            Frontend Developer &middot; Toshkent, O‘zbekiston
+            Frontend &amp; Backend Developer &middot; Toshkent, O‘zbekiston
           </p>
         </div>
 

@@ -1,16 +1,18 @@
+import { translate } from "../i18n/translations";
+
 export const MODE_KEY = "mode";
+export const LANG_KEY = "lang";
 export const USERS_KEY = "users";
 export const LOGGED_USER_KEY = "logged_in_user";
 
-const defaultAbout =
-  "To create innovative solutions in web development, build efficient and user-friendly applications, and grow through continuous learning.";
-
-const defaultUserFields = {
-  aboutMe: defaultAbout,
-  age: "35",
-  location: "Toshkent shahar, Chilonzor tumani, 8-mavze, 22-uy",
-  profileUrl: "/photo_2025-11-21_19-33-24.jpg",
-};
+function defaultUserFields() {
+  return {
+    aboutMe: translate(getInitialLanguage(), "profile.defaultAboutMe"),
+    age: "35",
+    location: "Toshkent shahar, Chilonzor tumani, 8-mavze, 22-uy",
+    profileUrl: "/photo_2025-11-21_19-33-24.jpg",
+  };
+}
 
 export function getUsers() {
   return JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
@@ -37,13 +39,13 @@ export function createUser(payload) {
   if (existingUser) {
     return {
       ok: false,
-      message: "Siz oldin ro'yxatdan o'tgansiz. Iltimos, login qiling.",
+      messageKey: "auth.userExists",
     };
   }
 
   const user = {
     id: crypto.randomUUID(),
-    ...defaultUserFields,
+    ...defaultUserFields(),
     ...payload,
   };
 
@@ -57,13 +59,13 @@ export function loginUser(email, password) {
   const user = users.find((item) => item.email === email);
 
   if (!user) {
-    return { ok: false, message: "Foydalanuvchi topilmadi." };
+    return { ok: false, messageKey: "auth.userNotFound" };
   }
 
   if (user.password !== password) {
     return {
       ok: false,
-      message: "Parol xato. Tekshirib, qayta urinib ko'ring.",
+      messageKey: "auth.wrongPassword",
     };
   }
 
@@ -96,4 +98,12 @@ export function getInitialTheme() {
 
 export function saveTheme(isDark) {
   localStorage.setItem(MODE_KEY, String(isDark));
+}
+
+export function getInitialLanguage() {
+  return localStorage.getItem(LANG_KEY) === "en" ? "en" : "uz";
+}
+
+export function saveLanguage(lang) {
+  localStorage.setItem(LANG_KEY, lang);
 }

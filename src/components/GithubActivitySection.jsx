@@ -62,7 +62,7 @@ export default function GithubActivitySection() {
           rel="noreferrer"
           className="btn-secondary btn-secondary-onlight"
         >
-          Barcha repolarni ko'rish
+          Barcha repolarni ko‘rish
           <i className="fa-solid fa-arrow-right" />
         </a>
       </div>

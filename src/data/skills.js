@@ -1,21 +1,21 @@
 export const skillGroups = [
   {
-    label: "Frontend",
+    labelKey: "skills.frontend",
     icon: "fa-solid fa-display",
     items: ["React", "JavaScript", "TypeScript", "HTML & CSS", "Tailwind CSS"],
   },
   {
-    label: "Backend",
+    labelKey: "skills.backend",
     icon: "fa-solid fa-server",
     items: ["Node.js", "NestJS", "PostgreSQL", "Firebase / Firestore", "coturn (TURN server)"],
   },
   {
-    label: "Flutter",
+    labelKey: "skills.flutter",
     icon: "fa-solid fa-mobile-screen-button",
     items: ["Flutter", "Dart", "WebRTC (flutter_webrtc)"],
   },
   {
-    label: "Tools & Workflow",
+    labelKey: "skills.tools",
     icon: "fa-solid fa-terminal",
     items: ["Vite", "Git & GitHub", "REST API", "Responsive Design"],
   },

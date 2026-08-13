@@ -5,10 +5,10 @@ import FadeInUp from "./motion/FadeInUp";
 import ThemeToggleButton from "./motion/ThemeToggleButton";
 
 const NAV_LINKS = [
-  { to: "/", label: "Home", end: true },
-  { to: "/about", label: "About" },
-  { to: "/projects", label: "Projects" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", label: "Bosh sahifa", end: true },
+  { to: "/about", label: "Men haqimda" },
+  { to: "/projects", label: "Loyihalar" },
+  { to: "/contact", label: "Aloqa" },
 ];
 
 export default function PortfolioHeader({ isDark, toggleTheme }) {

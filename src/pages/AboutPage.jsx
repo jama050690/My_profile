@@ -19,16 +19,27 @@ export default function AboutPage() {
               Jamshiddin Babajonov
             </h1>
             <p className="mt-4 text-xl font-semibold text-cyan-700">
-              Frontend Developer
+              Frontend &amp; Backend Developer
             </p>
             <p className="profile-copy mt-8 max-w-2xl text-lg leading-[1.7]">
-              Men frontend development yo‘nalishida ishlayman va zamonaviy,
-              foydalanuvchi uchun qulay web interfeyslar yaratishga qiziqaman.
-              React, JavaScript va Tailwind CSS bilan ishlashni yaxshi ko‘raman.
+              Salom! Men Jamshiddin — g‘oyalarni real ishlaydigan mahsulotga
+              aylantirishni yaxshi ko‘radigan frontend va backend dasturchiman.
+              Foydalanuvchi ko‘radigan interfeysni ham (React, Tailwind CSS),
+              uni ishga soluvchi serverni ham (Node.js, NestJS, PostgreSQL)
+              o‘zim quraman — kerak bo‘lsa, Flutter’da mobil ilova tomonini
+              ham qo‘shib ketaman.
             </p>
             <p className="profile-copy mt-5 max-w-2xl text-lg leading-[1.7]">
-              Asosiy maqsadim chiroyli, tezkor va amaliy web ilovalar yaratish,
-              doimiy o‘rganish va real loyihalar orqali tajribamni oshirib borishdir.
+              Eng ko‘p zavq oladigan ishim — murakkab muammoni topib, uni
+              ortiqcha murakkablashtirmasdan, sodda va aniq yechim bilan hal
+              qilish. Menimcha, yaxshi kod — ishlaydigan, tushunarli va
+              odamlarga real foyda beradigan koddir.
+            </p>
+            <p className="profile-copy mt-5 max-w-2xl text-lg leading-[1.7]">
+              Har bir loyiha men uchun yangi narsa o‘rganish imkoniyati,
+              shuning uchun to‘xtamay o‘rganaman va har safar avvalgisidan
+              yaxshiroq natija berishga harakat qilaman. Loyihangiz bormi?
+              Keling, uni birga hayotga tatbiq qilaylik.
             </p>
 
             <p className="mt-8 section-kicker font-mono text-cyan-600">
@@ -48,7 +59,7 @@ export default function AboutPage() {
               rel="noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--login-color)] px-6 py-3 font-semibold text-white transition hover:opacity-90"
             >
-              CV'ni ko'rish
+              CV'ni ko‘rish
               <i className="fa-solid fa-arrow-up-right-from-square" />
             </a>
           </article>
