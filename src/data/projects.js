@@ -41,6 +41,27 @@ export const projects = [
       "Portfolio ichida case-study ko‘rinishida taqdim etiladi",
     ],
   },
+  {
+    slug: "primeavto",
+    title: "PrimeAvto",
+    description:
+      "Yangi va haydalgan avtomobillarni qulay topish, solishtirish va xarid qilish uchun onlayn marketplace.",
+    stack: "Next.js",
+    tags: ["Next.js", "React", "Marketplace"],
+    icon: "fa-solid fa-car",
+    accent: ["#f97316", "#0f172a"],
+    liveUrl: "https://prime-avto-uz-kvq7.vercel.app/",
+    repoUrl: "https://github.com/jama050690/PrimeAvto.uz",
+    year: "2026",
+    role: "Frontend Developer",
+    summary:
+      "Avtomobil e’lonlari, dilerlar va avtoxizmat xizmatlarini bitta platformada jamlagan marketplace.",
+    highlights: [
+      "E’lonlar, dilerlar va avtoxizmat bo‘limlari bitta platformada",
+      "E’lonlarni solishtirish va sevimlilarga qo‘shish funksiyasi",
+      "Next.js asosida qurilgan tezkor va SEO-ga qulay arxitektura",
+    ],
+  },
 ];
 
 export function getProjectBySlug(slug) {
