@@ -5,6 +5,7 @@
     "watch:css": "pnpm exec tailwindcss -i ./css/styles.css -o ./src/generated.css --watch",
     "build:css": "pnpm exec tailwindcss -i ./css/styles.css -o ./src/generated.css --minify",
     "build": "pnpm run build:css && vite build",
+    "postbuild": "cp dist/index.html dist/404.html",
     "preview": "vite preview"
   },
   "dependencies": {
