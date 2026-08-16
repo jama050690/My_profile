@@ -119,6 +119,46 @@ export const projects = [
       },
     ],
   },
+  {
+    slug: "mini-instagram-clone",
+    title: "Instagram MVP",
+    description: {
+      uz: "Instagramga o‘xshash to‘liq funksional MVP — React frontendi va NestJS + Prisma backendidan tashkil topgan monorepo loyiha.",
+      en: "A full-featured Instagram-style MVP — a monorepo project built with a React frontend and a NestJS + Prisma backend.",
+    },
+    stack: {
+      uz: "React, NestJS, Prisma, Tailwind CSS",
+      en: "React, NestJS, Prisma, Tailwind CSS",
+    },
+    tags: ["React", "NestJS", "Prisma", "Monorepo"],
+    icon: "fa-brands fa-instagram",
+    accent: ["#d946ef", "#0f172a"],
+    liveUrl: "https://mini-instagram-clone-monorope-web-n.vercel.app/",
+    repoUrl: "https://github.com/jama050690/Mini_instagram_clone_monorope",
+    year: "2026",
+    role: {
+      uz: "Full-stack dasturchi",
+      en: "Full-stack Developer",
+    },
+    summary: {
+      uz: "Ijtimoiy tarmoq mantig‘ini — autentifikatsiya, media yuklash va bildirishnomalarni — to‘liq monorepo arxitekturada amalga oshirishga qaratilgan loyiha.",
+      en: "A project focused on implementing core social-network logic — authentication, media uploads, and notifications — within a full monorepo architecture.",
+    },
+    highlights: [
+      {
+        uz: "JWT va Google OAuth orqali xavfsiz autentifikatsiya",
+        en: "Secure authentication via JWT and Google OAuth",
+      },
+      {
+        uz: "Cloudinary orqali media yuklash va web-push bildirishnomalar",
+        en: "Media uploads via Cloudinary and web-push notifications",
+      },
+      {
+        uz: "Docker va Prisma bilan boshqariladigan React + NestJS monorepo",
+        en: "React + NestJS monorepo managed with Docker and Prisma",
+      },
+    ],
+  },
 ];
 
 export function getProjectBySlug(slug) {
