@@ -13,8 +13,8 @@ export const projects = [
     tags: ["React", "Vite", "Tailwind CSS"],
     icon: "fa-solid fa-bolt",
     accent: ["#0ea5e9", "#0f172a"],
-    liveUrl: "https://flypost.uz",
-    repoUrl: "",
+    liveUrl: "https://www.flypost.uz/",
+    repoUrl: "https://github.com/jama050690/Sending",
     year: "2026",
     role: {
       uz: "Frontend dasturchi",
