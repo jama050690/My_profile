@@ -40,8 +40,8 @@ export const projects = [
     ],
   },
   {
-    slug: "bootchat",
-    title: "Bootchat",
+    slug: "gujum",
+    title: "Gujum",
     description: {
       uz: "Chat va aloqa jarayonlarini soddalashtirishga qaratilgan loyiha. Alohida live link orqali ishga tushadi.",
       en: "A project focused on simplifying chat and communication flows. Runs via a separate live link.",
@@ -53,16 +53,16 @@ export const projects = [
     tags: ["Chat", "Live Deploy"],
     icon: "fa-solid fa-comments",
     accent: ["#14b8a6", "#082f49"],
-    liveUrl: "https://jamshiddin.uz/bootchat.uz",
-    repoUrl: "",
+    liveUrl: "https://gujum.jamshiddin.uz",
+    repoUrl: "https://github.com/jama050690/Gujum",
     year: "2026",
     role: {
       uz: "Veb-dasturchi",
       en: "Web Developer",
     },
     summary: {
-      uz: "Bootchat muloqot jarayonini soddalashtirish va foydalanuvchiga tushunarli digital tajriba berishga qaratilgan loyiha.",
-      en: "A project focused on simplifying the Bootchat communication flow and delivering a clear digital experience to users.",
+      uz: "Gujum muloqot jarayonini soddalashtirish va foydalanuvchiga tushunarli digital tajriba berishga qaratilgan loyiha.",
+      en: "A project focused on simplifying the Gujum communication flow and delivering a clear digital experience to users.",
     },
     highlights: [
       {
